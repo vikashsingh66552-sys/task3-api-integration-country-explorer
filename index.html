@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore countries around the world using live data from the REST Countries public API.">
+  <meta name="theme-color" content="#101827">
+  <title>Atlas | Country Explorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#" aria-label="Atlas home"><span class="brand-icon">A</span> atlas<span class="brand-dot">.</span></a>
+      <nav class="header-nav" aria-label="Main navigation"><a href="#explore">Explore</a><a href="#about">About</a></nav>
+      <div class="header-note"><span class="live-dot"></span> Live world data</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow"><span></span> THE WORLD, AT YOUR FINGERTIPS</div>
+          <h1>One world.<br><em>Many stories.</em></h1>
+          <p>Discover countries, explore cultures, and get to know our world. Every detail is just a search away.</p>
+          <a class="hero-link" href="#explore">Start exploring <span>↓</span></a>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="globe"><div class="globe-longitude"></div><div class="globe-latitude"></div><span>✳</span></div>
+          <div class="orbit-label label-one">195+ countries</div>
+          <div class="orbit-label label-two">One connected world</div>
+          <div class="hero-spark">✦</div>
+        </div>
+      </div>
+      <div class="hero-bottom container"><span>EXPLORE WITHOUT BORDERS</span><span>DATA POWERED BY REST COUNTRIES API ↗</span></div>
+    </section>
+
+    <section class="explore-section container" id="explore">
+      <div class="section-intro">
+        <div><div class="eyebrow">YOUR WORLD GUIDE</div><h2>Explore the <em>countries.</em></h2><p>Find a place, learn something new, and let curiosity lead the way.</p></div>
+        <div class="total-count"><strong id="country-count">—</strong><span>countries to discover</span></div>
+      </div>
+
+      <div class="controls">
+        <label class="search-field"><span>⌕</span><input id="search-input" type="search" placeholder="Search by country name..." aria-label="Search countries"><kbd>/</kbd></label>
+        <div class="control-right">
+          <label class="select-wrap"><span class="sr-only">Filter by region</span><select id="region-filter"><option value="all">All regions</option><option value="Africa">Africa</option><option value="Americas">Americas</option><option value="Asia">Asia</option><option value="Europe">Europe</option><option value="Oceania">Oceania</option><option value="Antarctic">Antarctic</option></select></label>
+          <label class="select-wrap"><span class="sr-only">Sort countries</span><select id="sort-select"><option value="name">Name: A to Z</option><option value="population">Population: high to low</option></select></label>
+          <button class="favorites-toggle" id="favorites-toggle" aria-pressed="false">♡ Favorites <span id="favorite-count">0</span></button>
+        </div>
+      </div>
+
+      <div class="status-line"><span id="status-text">Connecting to the world...</span><button id="retry-button" hidden>Try again ↻</button></div>
+      <div class="country-grid" id="country-grid" aria-live="polite"></div>
+      <div class="empty-state" id="empty-state" hidden><div class="empty-symbol">⌕</div><h3>No countries found</h3><p>Try a different name or change your filters.</p><button id="reset-filters">Reset filters</button></div>
+      <div class="load-more-wrap"><button id="load-more" class="load-more" hidden>Load more countries <span>↓</span></button></div>
+    </section>
+
+    <section class="about-section" id="about"><div class="container about-inner"><div class="about-symbol">✳</div><div><div class="eyebrow">A LITTLE MORE ABOUT THE WORLD</div><h2>Curiosity has<br><em>no borders.</em></h2><p>Atlas brings useful country information together in one simple place. Search by name, filter by region, and open any country to learn more.</p></div><div class="about-side"><strong>One API.</strong><strong>Global perspective.</strong><span>Built for curious minds.</span></div></div></section>
+  </main>
+
+  <footer class="footer"><div class="container footer-inner"><a class="brand" href="#"><span class="brand-icon">A</span> atlas<span class="brand-dot">.</span></a><span>Country information provided by REST Countries API.</span><a href="#explore">Back to explore ↑</a></div><div class="container footer-bottom">© <span id="year"></span> Atlas Country Explorer · Built with HTML, CSS & JavaScript</div></footer>
+
+  <div class="modal-backdrop" id="detail-backdrop" hidden>
+    <section class="detail-modal" role="dialog" aria-modal="true" aria-labelledby="detail-name">
+      <button class="modal-close" id="modal-close" aria-label="Close country details">×</button>
+      <div id="detail-content"></div>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
